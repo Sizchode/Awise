@@ -1,31 +1,22 @@
-//
-//  signInPage.swift
-//  Awise
-//
-//  Created by Harry Chen on 10/31/22.
-//
-
-import SwiftUI
-
 struct signInPage: View {
     @State var account = ""
     @State var password = ""
     var body: some View {
-
-        ZStack(alignment: .leading){
-            VStack(alignment: .leading){
-
-                Text("Housing starts with Awise")
+        ZStack{
+            VStack{
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.top,80)
+                Text("A Wise Room mate")
                     .font(.title)
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
                     .padding()
-                
                 Text("Please log in to continue")
                     .foregroundColor(Color.black.opacity(0.5))
                     .fontWeight(.heavy)
                     .padding()
-                
                 GroupBox{
                     HStack{
                         //account
@@ -42,7 +33,7 @@ struct signInPage: View {
                 .background(Color.black.opacity(account == "" ? 0 : 0.12))
                 .cornerRadius(15)
                 .padding()
-                
+                .frame(width:400, height: 80)
                 GroupBox{
                     HStack{
                         //password
@@ -58,7 +49,7 @@ struct signInPage: View {
                 .background(Color.black.opacity(password == "" ? 0 : 0.12))
                 .cornerRadius(15)
                 .padding(/*@START_MENU_TOKEN@*/[.top, .leading, .trailing]/*@END_MENU_TOKEN@*/)
-                
+                .frame(width:400, height: 80)
                 HStack{
                     Spacer()
                     NavigationLink(destination: forgetPassword()){
@@ -71,8 +62,7 @@ struct signInPage: View {
                             .background(Color("black"))
                     }
                 }
-                
-                
+                .frame(width:400, height: 80)
                 NavigationLink(destination: HomePageView()){
                     ZStack{
                         Capsule()
@@ -93,10 +83,8 @@ struct signInPage: View {
                         }
                     }
                 }
-                .padding(.leading)
-
+                .padding([.leading, .bottom, .trailing])
                 Divider()
-                
                 NavigationLink(destination: SignUpPage()){
                     ZStack{
                         Capsule()
@@ -121,18 +109,8 @@ struct signInPage: View {
                 }
                 .padding([.leading, .bottom, .trailing])
             }
-            
-        }
-        .toolbar{
-            ToolbarItemGroup(placement:.navigationBarTrailing){
-                Image("Awise Image Header")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 90, height: 90)
-            }
-        }
+        }.navigationBarHidden(true)
         .cornerRadius(20)
         .padding()
     }
-    
 }
