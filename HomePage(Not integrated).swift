@@ -37,37 +37,92 @@ struct HomePageView: View {
 }
 
 
+
 struct HomeView: View{
-    let cardGradient = Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.5)])
-    var body: some View{
-        
-        VStack{
-            //top stack
-            HStack{
-                
-            }.padding(.horizontal)
-            //card View
+    var body: some View {
+        ZStack{
             ZStack{
-                /*ForEach(0..<5){item in
-                    CardView().padding(8)
-                }*/
-                
                 ForEach(Card.data.reversed()){card in
-                     CardView(card: card).padding(8)
-                 }
-                 
+                    CardView(card: card).padding(8)
+                }
+            }.frame(width: 100, height:  575)
+            HStack{
+                GeometryReader { geometry in
+                    VStack {
+                        Spacer()
+                        HStack {
+                            NavigationLink(destination: ProfileView()){
+                                VStack {
+                                    Image(systemName: "person.crop.circle")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: geometry.size.width/5, height: geometry.size.height/28)
+                                        .padding(.top, 10)
+                                    Text("Profile")
+                                        .font(.footnote)
+                                    Spacer()
+                                }
+                            }.accentColor(Color(.black))
+                            NavigationLink(destination: QuizScroll()){
+                                VStack {
+                                    Image(systemName: "doc.richtext")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: geometry.size.width/5, height: geometry.size.height/28)
+                                        .padding(.top, 10)
+                                    Text("Quiz")
+                                        .font(.footnote)
+                                    Spacer()
+                                }
+                            }.accentColor(Color(.black))
+                            ZStack {
+                                Circle()
+                                    .foregroundColor(.white)
+                                    .frame(width: geometry.size.width/7, height: geometry.size.width/7)
+                                    .shadow(radius: 4)
+                                Image(systemName: "plus.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: geometry.size.width/7-6 , height: geometry.size.width/7-6)
+                                    .foregroundColor(Color.pink)
+                            }
+                            .offset(y: -geometry.size.height/8/2)
+                            NavigationLink(destination: SettingView()){
+                                VStack {
+                                    Image(systemName: "highlighter")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: geometry.size.width/5, height: geometry.size.height/28)
+                                        .padding(.top, 10)
+                                    
+                                    Text("Setting")
+                                        .font(.footnote)
+                                    Spacer()
+                                }
+                            }.accentColor(Color(.black))
+                            NavigationLink(destination: signInPage()){
+                                VStack {
+                                    Image(systemName: "figure.walk.circle")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: geometry.size.width/5, height: geometry.size.height/28)
+                                        .padding(.top, 10)
+                                    
+                                    Text("Log Out")
+                                        .font(.footnote)
+                                    Spacer()
+                                }
+                            }.accentColor(Color(.black))
+                        }
+                        .frame(width: geometry.size.width, height: geometry.size.height/8)
+                    }
+                }         .edgesIgnoringSafeArea(.bottom)
+                
             }
-            //Bottom Stack
-            HStack(spacing:0){
-                /*Button(action:{}){
-                    Image(systemName: "person.fill")
-                        .foregroundColor(.black)
-                        .frame(width: 40, height: 40)
-                }*/
-            }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
+
 //card view
 struct CardView: View{
     @State var card: Card
