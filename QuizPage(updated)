@@ -14,6 +14,33 @@ struct QuizPage: View {
         }
     }
 }
+
+/*class QuizAnswers: ObservableObject {
+    @Published var user_id
+    @Published var name
+    //@Published var email
+    //@Published var password
+    //@Published var gender
+    @Published var year
+    @Published var rent
+    @Published var move_in_date
+    @Published var num_of_rooms
+    @Published var location
+    @Published var getup_time
+    @Published var bed_time
+    @Published var social
+    @Published var academic
+    @Published var bring_people
+    @Published var animal
+    @Published var instrument
+    @Published var cleaning
+    @Published var cook
+    @Published var sharing
+    @Published var smoke
+    @Published var alcohol
+    @Published var academic
+}*/
+
 struct Quiz1: View{
     @State var name = ""
     
@@ -45,7 +72,7 @@ struct Quiz1: View{
             .padding(.bottom)
             Spacer()
 
-            NavigationLink(destination: SignUpPage()){
+            NavigationLink(destination: signInPage()){
                 ZStack{
                     Capsule()
                         .foregroundColor(.blue)
@@ -242,7 +269,9 @@ struct Quiz3: View{
 }
 
 struct Quiz4: View{
-    @State var date = ""
+   // @State var date = ""
+    @State private var date = Date()
+
     var body: some View{
         VStack{
             
@@ -255,22 +284,27 @@ struct Quiz4: View{
             
             Spacer()
             
-            Text("Please follow the format in the textfield")
+           /* Text("Please follow the format in the textfield")
                 .font(.subheadline)
                 .foregroundColor(.gray)
                 .padding(.leading)
                 .padding(.top)
-                .padding(.trailing)
+                .padding(.trailing)*/
             
             
-            GroupBox{
+            /*GroupBox{
                 TextField("mm/dd/yyyy", text: $date)
             }
             .padding()
             .background(Color.black.opacity(date == "" ? 0 : 0.12))
             .cornerRadius(15)
             .padding(.horizontal)
-            .padding(.bottom)
+            .padding(.bottom)*/
+            DatePicker(
+                "Start Date",
+                selection: $date,
+                displayedComponents: [.date]
+            ).datePickerStyle(.graphical)
             
             Spacer()
             
@@ -469,9 +503,11 @@ struct Quiz6: View{
 }
 
 struct Quiz7: View{
-    @State var hour = ""
+    /* @State var hour = ""
     @State var minute = ""
-    @State var time = ""
+    @State var time = ""*/
+    @State private var date = Date()
+
     var body: some View{
         VStack{
             
@@ -484,7 +520,7 @@ struct Quiz7: View{
 
             Spacer()
             
-            Text("Please follow the format in the textfield")
+            /*Text("Please follow the format in the textfield")
                 .font(.subheadline)
                 .foregroundColor(.gray)
                 .padding(.leading)
@@ -498,8 +534,12 @@ struct Quiz7: View{
             .background(Color.black.opacity(time == "" ? 0 : 0.12))
             .cornerRadius(15)
             .padding(.horizontal)
-            .padding(.bottom)
-            
+            .padding(.bottom)*/
+            DatePicker(
+                   "Sleep Time",
+                    selection: $date,
+                    displayedComponents: [.hourAndMinute]
+               )
             Spacer()
             NavigationLink(destination: Quiz6()){
                 ZStack{
@@ -548,6 +588,8 @@ struct Quiz8: View{
     @State var hour = ""
     @State var minute = ""
     @State var time = ""
+    @State private var date = Date()
+
     var body: some View{
         VStack{
             
@@ -560,18 +602,12 @@ struct Quiz8: View{
 
             Spacer()
             
-            Text("Please follow the format in the textfield")
-                .font(.subheadline)
-                .foregroundColor(.gray)
-                .padding(.leading)
-                .padding(.top)
-                .padding(.trailing)
+            DatePicker(
+                   "Sleep Time",
+                    selection: $date,
+                    displayedComponents: [.hourAndMinute]
+               )
             
-            
-            GroupBox{
-                TextField("Hour:Minute", text: $time)
-
-            }
             .padding()
             .background(Color.black.opacity(time == "" ? 0 : 0.12))
             .cornerRadius(15)
@@ -1391,6 +1427,7 @@ struct Quiz18: View{
         .padding()
     }
 }
+
 struct Quiz_Previews: PreviewProvider {
     static var previews: some View {
         QuizPage()
